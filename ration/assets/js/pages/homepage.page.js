@@ -15,6 +15,7 @@ parasails.registerPage('homepage', {
   },
   mounted: async function(){
     this._setHeroHeight();
+    console.log("KAPPA")
   },
 
   //  ╦╔╗╔╔╦╗╔═╗╦═╗╔═╗╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
@@ -27,6 +28,7 @@ parasails.registerPage('homepage', {
       $('html, body').animate({
         scrollTop: this.$find('[role="scroll-destination"]').offset().top
       }, 500);
+      console.log("KAPPER2")
     },
 
     // Private methods not tied to a particular DOM event are prefixed with _
