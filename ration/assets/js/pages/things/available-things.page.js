@@ -24,6 +24,7 @@ parasails.registerPage('available-things', {
   methods: {
     clickThing: function(thingId) {
       console.log("clicked thing " + thingId);
+      // here delete it
     }
   }
 });

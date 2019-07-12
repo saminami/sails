@@ -32,6 +32,8 @@ module.exports.routes = {
     'GET /account/password': { action: 'account/view-edit-password' },
     'GET /account/profile': { action: 'account/view-edit-profile' },
 
+    'GET /things': { action: 'things/view-available-things' },
+
     //  ╔╦╗╦╔═╗╔═╗  ╦═╗╔═╗╔╦╗╦╦═╗╔═╗╔═╗╔╦╗╔═╗   ┬   ╔╦╗╔═╗╦ ╦╔╗╔╦  ╔═╗╔═╗╔╦╗╔═╗
     //  ║║║║╚═╗║    ╠╦╝║╣  ║║║╠╦╝║╣ ║   ║ ╚═╗  ┌┼─   ║║║ ║║║║║║║║  ║ ║╠═╣ ║║╚═╗
     //  ╩ ╩╩╚═╝╚═╝  ╩╚═╚═╝═╩╝╩╩╚═╚═╝╚═╝ ╩ ╚═╝  └┘   ═╩╝╚═╝╚╩╝╝╚╝╩═╝╚═╝╩ ╩═╩╝╚═╝
@@ -69,5 +71,8 @@ module.exports.routes = {
     },
     'POST  /api/v1/deliver-contact-form-message': {
         action: 'deliver-contact-form-message'
+    },
+    'DELETE  /api/v1/things/destroy-one-thing': {
+        action: 'things/destroy-one-thing'
     }
 };
