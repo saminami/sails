@@ -25,7 +25,9 @@ module.exports = {
     // ];
 
     // Todo only fetch thing that the current user is allowed to see
-    const things = await Thing.find()
+    const things = await Thing.find({
+       owner: this.req.me.id 
+    });
 
     return {
       things,
