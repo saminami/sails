@@ -1,32 +1,32 @@
 module.exports = {
+    friendlyName: 'Destroy one thing',
 
+    description: 'Delete the "thing" with the spesified id from the database.',
 
-  friendlyName: 'Destroy one thing',
+    inputs: {
+        id: {
+            type: 'number',
+            required: true
+        }
+    },
 
+    exits: {
+        forbidden: {
+            description:
+                'The users making this request does not have the permissions to delete this thing',
+            responseType: 'forbidden'
+        }
+    },
 
-  description: 'Delete the "thing" with the spesified id from the database.',
+    fn: async function(inputs) {
+        const thing = await Thing.findOne({ id: inputs.id });
 
+        if (thing.owner !== this.req.me.id) {
+            throw 'forbidden';
+        }
 
-  inputs: {
-    id: {
-      type: 'number',
-      required: true,
+        await Thing.destroy({ id: inputs.id });
+
+        return;
     }
-  },
-
-
-  exits: {
-
-  },
-
-
-  fn: async function (inputs) {
-
-    await Thing.destroy({ id: inputs.id });
-    
-    return;
-
-  }
-
-
 };
