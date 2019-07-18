@@ -15,7 +15,7 @@ module.exports.bootstrap = async function() {
   var path = require('path');
 
   // This bootstrap version indicates what version of fake data we're dealing with here.
-  var HARD_CODED_DATA_VERSION = 0.5;
+  var HARD_CODED_DATA_VERSION = 0.6;
 
   // This path indicates where to store/look for the JSON file that tracks the "last run bootstrap info"
   // locally on this development computer (if we happen to be on a development computer).
@@ -74,12 +74,11 @@ module.exports.bootstrap = async function() {
       }
   ]).fetch();
 
-  users.map(async user => {
-      await Thing.create({ label: 'Monka Power Blades', owner: user.id });
-      await Thing.create({ label: 'Red Machine Motor', owner: user.id });
-  });
-
-  await Thing.create({ label: 'Extra Item', owner: users[1].id });
+  await Thing.createEach([
+      { label: 'Monka Power Blades', owner: users[0].id },
+      { label: 'Red Machine Motor', owner: users[0].id },
+      { label: 'Extra Item', owner: users[1].id }
+  ]);
 
   // Save new bootstrap version
   await sails.helpers.fs.writeJson.with({
