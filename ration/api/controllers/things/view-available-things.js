@@ -17,16 +17,17 @@ module.exports = {
 
 
   fn: async function () {
+    const me = await User.findOne({
+        id: this.req.me.id
+    }).populate('friends');
 
-    // Respond with view.
-    // const things = [
-    //     { id: 1, label: 'Sweet Red Drill' },
-    //     { id: 1, label: 'Red Mountain Bike' }
-    // ];
+    const friendIds = _.map(me.friends, 'id');
 
-    // Todo only fetch thing that the current user is allowed to see
     const things = await Thing.find({
-       owner: this.req.me.id 
+        or: [
+          { owner: this.req.me.id },
+          { owner: { in: friendIds } }
+        ]
     });
 
     return {
