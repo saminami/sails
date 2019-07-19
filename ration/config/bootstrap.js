@@ -74,10 +74,16 @@ module.exports.bootstrap = async function() {
       }
   ]).fetch();
 
+  const samiPeralahti = users[0];
+  const ryanDahl = users[1];
+  
+  // Add ryanDah as one of Sami's friends
+  await User.addToCollection(samiPeralahti.id, 'friends', ryanDahl.id);
+
   await Thing.createEach([
-      { label: 'Monka Power Blades', owner: users[0].id },
-      { label: 'Red Machine Motor', owner: users[0].id },
-      { label: 'Extra Item', owner: users[1].id }
+      { label: 'Monka Power Blades', owner: samiPeralahti.id },
+      { label: 'Red Machine Motor', owner: samiPeralahti.id },
+      { label: 'Extra Item', owner: ryanDahl.id }
   ]);
 
   // Save new bootstrap version
