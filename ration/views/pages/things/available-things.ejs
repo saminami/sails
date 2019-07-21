@@ -5,10 +5,9 @@
 
   <button>Todo</button>
   <ul v-for="thing in things" >
-    <li v-if="thing.owner === me.id"  @click="clickThing(thing.id)">{{thing.label}}You own this (Click to delete)</li>
+    <li v-if="thing.owner === me.id"  @click="clickThing(thing.id)">{{thing.label}} You own this (Click to delete)</li>
 
     <li v-else>{{thing.label}}</li>
-    
     
     <tab v-else :key="tab.id" :name="tab.id"></tab>
   </ul>
