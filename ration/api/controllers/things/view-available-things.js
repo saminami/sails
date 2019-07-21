@@ -30,6 +30,11 @@ module.exports = {
         ]
     });
 
+    console.log(things);
+
+    // get the Onwer of the thing to the frontend
+    // if the owner === current user, display delete link
+
     return {
       things,
     };
