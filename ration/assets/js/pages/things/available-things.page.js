@@ -3,7 +3,8 @@ parasails.registerPage('available-things', {
   //  ║║║║║ ║ ║╠═╣║    ╚═╗ ║ ╠═╣ ║ ║╣
   //  ╩╝╚╝╩ ╩ ╩╩ ╩╩═╝  ╚═╝ ╩ ╩ ╩ ╩ ╚═╝
   data: {
-    //…
+    things:[],
+    confirmDeleteModalOpen: false,
   },
 
   //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -23,16 +24,17 @@ parasails.registerPage('available-things', {
   //  ╩╝╚╝ ╩ ╚═╝╩╚═╩ ╩╚═╝ ╩ ╩╚═╝╝╚╝╚═╝
   methods: {
     clickThing: async function(thingId) {
-      console.log("clicked thing " + thingId);
-
-      // set loading state
       const thingToModify = this.things.find(item => item.id === thingId);
       Object.assign(thingToModify, { label: 'Removing' });  
       this.$forceUpdate();
-      // remove the item from the backend
       await Cloud.destroyOneThing.with({ id: thingId });
       _.remove(this.things, { id: thingId });
       this.$forceUpdate();
+    },
+    clickDeleteButton: async function(thingId) {
+      console.log("Clicked delete")
+      this.confirmDeleteModalOpen = true;
     }
+
   }
 });
