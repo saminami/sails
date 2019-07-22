@@ -18,7 +18,13 @@
 
   <% /* Confirm delte things modal */ %>
   <modal v-if="confirmDeleteModalOpen && selectedThing">
-    <ajax-form action="destroyOneThing" :syncing.synch="syncing" :cloud-error.synch="cloudError">
+    <ajax-form 
+      action="destroyOneThing" 
+      :syncing.synch="syncing"
+      :cloud-error.synch="cloudError"
+      :handle-parsing="handleParsingDeleteThingForm"
+      @submitted="submittedDeleteThingForm"  
+    >
       <div class="card">
         <div class="card-header">
           Remove this item?
@@ -29,8 +35,8 @@
         <div class="card-body">
           <h5 class="card-title">Are you sure you want to delete {{selectedThing.label}}?</h5>
           <p class="card-text">This item will no longer be available to share with friends!</p>
-          <a href="#" class="btn btn-light float-right">Nevermind</a>
-          <a href="#" class="btn btn-danger float-right">Delete</a>
+          <button type="submit" class="btn btn-danger float-right">Delete</button>
+          <button data-dismiss="modal" type="button" class="btn btn-light float-right">Nevermind</button>
         </div>
       </div>
     </ajax-form>

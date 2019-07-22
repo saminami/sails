@@ -9,7 +9,7 @@ parasails.registerPage('available-things', {
         // syncing / loading state
         syncing: false,
         // server Error state
-        cloudError: "",
+        cloudError: ''
     },
 
     //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -43,6 +43,20 @@ parasails.registerPage('available-things', {
         closeDeleteModal: function(thingId) {
             this.selectedThing = null;
             this.confirmDeleteModalOpen = false;
+        },
+
+        handleParsingDeleteThingForm: function() {
+            return {
+                id: this.selectedThing.id
+            };
+        },
+
+        submittedDeleteThingForm: function() {
+            _.remove(this.things, { id: this.selectedThing.id });
+            this.$forceUpdate();
+
+            this.confirmDeleteModalOpen = false;
+            this.selectedThing = null;
         }
     }
 });
