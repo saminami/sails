@@ -3,7 +3,7 @@
   <h1>Things</h1>
   <p>Check things you want to borrow</p>
 
-  <button>Todo</button>
+  <button @click="clickAddThingButton">Add Thing</button>
   <ul v-for="thing in things" >
     <li v-if="thing.owner === me.id">{{thing.label}} (You own this)
       <!-- <button @click="clickThing(thing.id)" >Delete</button> -->
@@ -16,13 +16,55 @@
     <tab v-else :key="tab.id" :name="tab.id"></tab>
   </ul>
 
+  <% /* Add new thing modal */ %>
+  <modal v-if="uploadModalOpen">
+    <ajax-form action="uploadThing"
+      :syncing.synch="syncing"
+      :cloud-error.synch="cloudError"
+      :handle-parsing="handleParsingUploadForm" 
+    >
+      <div class="card">
+        <div class="card-header">
+          Upload New Thing
+          <button type="submit" data-dismiss="modal" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Add a photo:</li>
+        </ul>
+        <div class="row">
+          <div class="col-md-6">
+            <img class="card-img-left img-thumbnail"
+              src="https://www.blackbeltkaratestudio.com/wp-content/uploads/2017/04/default-image.jpg" alt="Uplad your Image">
+          </div>
+          <div class="col-md-6">
+            <label for="exampleFormControlFile1">Example file input</label>
+            <input type="file" class="form-control-file" id="exampleFormControlFile1">
+            <p><b>TIP: </b> Make sure the thing is in the front and center of the image!</p>
+          </div>
+        </div>
+
+        <div class="card-body">
+          What is it?
+          <input type="text" class="">
+        </div>
+        
+        <div class="card-body">
+          <button class="btn btn-danger float-right">Share Item</button>
+          <button data-dismiss="modal" type="button" class="btn btn-light float-right">Cancel</button>
+        </div>
+      </div>
+    </ajax-form>
+  </modal>
+
   <% /* Confirm delte things modal */ %>
   <modal v-if="confirmDeleteModalOpen && selectedThing">
     <ajax-form 
       action="destroyOneThing" 
       :syncing.synch="syncing"
       :cloud-error.synch="cloudError"
-      :handle-parsing="handleParsingDeleteThingForm"
+      :handle-parsing="handleParsingUploadForm"
       @submitted="submittedDeleteThingForm"  
     >
       <div class="card">

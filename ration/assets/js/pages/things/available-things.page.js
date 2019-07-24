@@ -9,7 +9,14 @@ parasails.registerPage('available-things', {
         // syncing / loading state
         syncing: false,
         // server Error state
-        cloudError: ''
+        cloudError: '',
+
+        // uload modal
+        uploadModalOpen: false,
+        uploadFromData: {
+            label: ''
+        },
+        formErrors: {}
     },
 
     //  ╦  ╦╔═╗╔═╗╔═╗╦ ╦╔═╗╦  ╔═╗
@@ -49,6 +56,42 @@ parasails.registerPage('available-things', {
 
             this.confirmDeleteModalOpen = false;
             this.selectedThing = null;
+        },
+
+        clickAddThingButton: function() {
+            this.uploadModalOpen = true;
+        },
+
+        handleParsingUploadForm: function() {
+            this.formErrors = {};
+
+            const argins = this.uploadFromData;
+
+            // Todo validation goes here
+
+            if (Object.keys(this.formErrors).length > 0) {
+                return;
+            }
+
+            return argins;
+        },
+
+        submittedUploadThingForm: function(result) {
+            // TODO
+
+            this._clearUploadThingModal();
+        },
+
+        _clearUploadThingModal: function() {
+          this.uploadModalOpen = false;
+
+          this.uploadFromData = {
+            label: ""
+          };
+
+          this.formErrors = {};
+          this.cloudError = "";
+
         }
     }
 });

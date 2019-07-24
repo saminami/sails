@@ -74,5 +74,8 @@ module.exports.routes = {
     },
     'DELETE  /api/v1/things/destroy-one-thing': {
         action: 'things/destroy-one-thing'
+    },
+    'PUT   /api/v1/things/upload-thing': {
+        action: 'thing/upload-thing'
     }
 };
