@@ -17,6 +17,18 @@ module.exports = {
         example: 'WaffleMaker',
         description: 'A user submitted label describing this thing',
     },
+    
+    imageUploadFd: {
+        type: 'string',
+        required: true,
+        description: 'The Skipper file descriptor that uniquely identifies the uploaded image.',
+    },
+
+    imageUploadMime: {
+        type: 'string',
+        required: true,
+        description: 'Mimetype for the image uploaded',
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
