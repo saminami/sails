@@ -78,7 +78,15 @@ parasails.registerPage('available-things', {
         },
 
         submittedUploadThingForm: function(result) {
-            // TODO
+
+            this.things.push({
+                label: this.uploadFromData.label,
+                id: result.id,
+                owner: {
+                    id: this.me.id,
+                    fullName: this.me.fullName,
+                }
+            });
 
             this._clearUploadThingModal();
         },

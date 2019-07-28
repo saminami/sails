@@ -17,6 +17,12 @@ module.exports = {
     },
 
     exits: {
+      success: {
+        outputDescription: "newly created recrod",
+        outputType: {
+          id: 'number'
+        },
+      },
       badRequest: {
         description: "No image upload was provided",
         responseType: 'badRequest',
@@ -31,13 +37,15 @@ module.exports = {
             throw 'badRequest';
         }
 
-        await Thing.create({
+        const createdThing = await Thing.create({
             imageUploadFd: info.fd,
             imageUploadMime: info.type,
             owner: this.req.me.id,
             label: inputs.label
-        });
+        }).fetch();
 
-        return;
+        return {
+          id: createdThing.id,
+        };
     }
 };
