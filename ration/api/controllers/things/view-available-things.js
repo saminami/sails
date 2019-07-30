@@ -17,6 +17,9 @@ module.exports = {
 
 
   fn: async function () {
+
+    const url = require('url');
+
     const me = await User.findOne({
         id: this.req.me.id
     }).populate('friends');
@@ -28,6 +31,15 @@ module.exports = {
           { owner: this.req.me.id },
           { owner: { in: friendIds } }
         ]
+    });
+
+    _.each(things, (thing) => {
+        thing.imageSrc = url.resolve(
+          sails.config.custom.baseUrl,
+          '/api/v1/things/' + thing.id
+          )
+        delete thing.imageUploadFd;
+        delete thing.imageUploadMime;
     });
 
     return {

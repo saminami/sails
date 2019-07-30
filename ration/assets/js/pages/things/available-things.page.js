@@ -73,18 +73,18 @@ parasails.registerPage('available-things', {
             if (Object.keys(this.formErrors).length > 0) {
                 return;
             }
-
             return argins;
         },
 
         submittedUploadThingForm: function(result) {
-
+            console.log(result);
+            console.log(this.uploadFromData);
             this.things.push({
                 label: this.uploadFromData.label,
                 id: result.id,
                 owner: {
                     id: this.me.id,
-                    fullName: this.me.fullName,
+                    fullName: this.me.fullName
                 }
             });
 

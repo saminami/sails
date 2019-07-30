@@ -20,7 +20,8 @@ module.exports = {
       success: {
         outputDescription: "newly created recrod",
         outputType: {
-          id: 'number'
+          id: 'number',
+          imageSrc: 'string',
         },
       },
       badRequest: {
@@ -30,6 +31,8 @@ module.exports = {
     },
 
     fn: async function(inputs) {
+
+        const url = require('url');
 
         const info = await sails.uploadOne(inputs.photo);
 
@@ -44,8 +47,12 @@ module.exports = {
             label: inputs.label
         }).fetch();
 
+
         return {
           id: createdThing.id,
+          imageSrc: url.resolve(
+            sails.config.custom.baseUrl,
+            '/api/v1/things/' + createdThing.id)
         };
     }
 };
