@@ -15,7 +15,7 @@ parasails.registerPage('available-things', {
         uploadModalOpen: false,
         uploadFromData: {
             label: '',
-            photo: null,
+            photo: null
         },
         formErrors: {}
     },
@@ -92,26 +92,40 @@ parasails.registerPage('available-things', {
         },
 
         _clearUploadThingModal: function() {
-          this.uploadModalOpen = false;
+            this.uploadModalOpen = false;
 
-          this.uploadFromData = {
-            label: "",
-            photo: null,
-          };
+            this.uploadFromData = {
+                label: '',
+                photo: null
+            };
 
-          this.formErrors = {};
-          this.cloudError = "";
-
+            this.formErrors = {};
+            this.cloudError = '';
         },
 
         changeFileInput: function(files) {
             const selectedFile = files[0];
-            if(!selectedFile) {
+            if (!selectedFile) {
                 this.uploadFromData.photo = null;
                 return;
             }
 
             this.uploadFromData.photo = selectedFile;
+        },
+
+        changeThingLabel: function(event) {
+
+            if (!event) {
+                return
+            }
+
+            const currentLabel = event.target.value;
+
+            if (!currentLabel) {
+                return 
+            }
+
+            this.uploadFromData.label = event.target.value;
         }
     }
 });
